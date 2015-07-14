@@ -1,0 +1,6 @@
+{
+  "name": "flight-table",
+  "dependencies": {
+    "normalize.css": "~3.0.3"
+  }
+}
