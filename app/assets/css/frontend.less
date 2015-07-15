@@ -1,27 +1,262 @@
 @import "variables.less";
 
+html {
+	font-size: 100%;
+}
 
 body {
 	background: #fff;
+	min-width: @min-w;
+	font-size: .8em;
 }
+
+/* some default styles */
+.a-center {
+	text-align: center;
+}
+.hidden {
+	display: none;
+}
+/* some default styles */
 
 .container {
-	padding: @base-padding;
-	border: @b;
+	margin: @base-padding;
 }
 
-.flight-table {
-	border-collapse: collapse;
-	border: 0;
-	width: 100%;
+table {
 
 	td {
+		padding: 3px 5px;
+		margin: 0;
+		border: 1px solid #ccc;
+		background: @white;
+		white-space: nowrap;
+		border-style: none solid solid none;
+		// .transition-properties(background .05s linear;); /* semicolon is necessary */
+	}
+
+	tr {
 		padding: 0;
 		margin: 0;
 		border: 1px solid #ccc;
 	}
 
-	thead {
-		position: fixed;
+
+}
+
+.flight-table {
+
+	.table-head {
+		position: absolute;
+		left: @base-padding;
+		top: @base-padding;
+		width: calc(~"100% - 120px");
+		height: 20px;
+		overflow: hidden;
+		z-index: 100;
+
 	}
+
+	.table-head-fixed {
+		position: fixed;
+		top: 0;
+	}
+
+	table {
+	    border-collapse: collapse;
+		border: 0;
+		width: 100%;
+		min-width: @min-w;
+
+		col.hightlight {
+			background: #f2dede !important;
+		}
+
+		thead {
+
+			td {
+				padding: 10px 5px;
+				background: #fcf8e3;
+			}
+
+		}
+		tbody {
+			tr:nth-child(odd) td {
+				background: #dff0d8;
+			}
+			tr:nth-child(even) td {
+				background: #ffffff;
+			}
+			tr:hover td, tr td.hover {
+				background: #f2dede;
+			}
+
+		}
+
+		td.company, td.status {
+			white-space: normal;
+		}
+	}
+
+} // .flight-table
+
+form {
+	background: darken(@white, 10%);
+	margin: 0 0 20px 0;
+
+	label {
+		padding: 20px;
+		display: inline-block;
+
+		input[type=checkbox] {
+			margin: 0 5px 0 0;
+		}
+	}
+}
+
+.overlay {
+	position: fixed;
+	left: 0; 
+	top: 0; 
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 200;
+	display: none;
+}
+
+.popup {
+	position: fixed;
+	left: 50vw; 
+	top: 50vh;
+	width: 30vw; 
+	height: auto; 
+	background: @white;
+	z-index: 200;
+	min-width: 500px;
+	min-height: 300px;
+	margin: -15vh 0 0 -15vw;
+	display: none;
+
+	.wrapper { 
+		position: relative;
+		width: 100%;
+
+		.close {
+			position: absolute;
+			right: 5px;
+			top: 0px;
+			font-size: 2em;
+			cursor: pointer;
+		}
+		.close:hover {
+			color: #ff0000;
+		}
+
+		.content {
+			padding: 40px;
+
+			table {
+				width: 100%;
+
+				tr {
+					td {
+						padding: 5px;
+						white-space: normal;
+					}
+					td:first-child {
+						background: #eee;
+					}
+					td.image_place {
+						background: white;
+					}
+				}
+			}
+
+		}
+	}
+}
+
+@media @big {
+	.small { display: none; }
+	.middle { display: none; }
+	.full { display: none; }
+	.big { display: block; }
+	td.small { display: none; }
+	td.middle { display: none; }
+	td.full { display: table-cell; }
+}
+
+@media @full {
+	.small { display: none; }
+	.middle { display: none; }
+	.big { display: none; }
+	.full { display: block; }
+	td.small { display: none; }
+	td.middle { display: none; }
+	td.full { display: table-cell; }
+}
+
+@media @middle {
+	.small { display: none; }
+	.full { display: none; }
+	.big { display: none; }
+	.middle { display: block; }
+	td.small { display: none; }
+	td.full { display: none; }
+	td.middle { display: table-cell; }
+
+	td { padding: 3px 3px; }
+
+	.flight-table {
+		
+		.table-head {
+			left: @base-padding-middle;
+			top: @base-padding-middle;
+			width: calc(~"100% - 40px");
+		}
+
+		.table-head-fixed {
+			top: 0;
+		}
+
+	}
+	.container {
+		margin: @base-padding-middle;
+	}
+
+}
+
+@media @small {
+	.middle { display: none; }
+	.full { display: none; }
+	.big { display: none; }
+	.small { display: block; }
+	td.middle { display: none; }
+	td.full { display: none; }
+	td.small { display: table-cell; }
+	td.company_icon {
+		img {
+			max-width: 60px;
+			max-height: 15px;
+		}
+	}
+
+	.flight-table {
+		
+		.table-head {
+			left: @base-padding-middle;
+			top: @base-padding-middle;
+			width: calc(~"100% - 40px");
+		}
+
+		.table-head-fixed {
+			top: 0;
+		}
+
+	}
+	.container {
+		margin: @base-padding-middle;
+	}
+
 }

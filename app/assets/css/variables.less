@@ -1,2 +1,27 @@
-@base-padding: 20px;
+/* paddings and sizes */
+@base-padding: 60px;
+@base-padding-middle: 20px;
+@min-w: 800px;
+
+/* borders */
 @b: 1px solid red;
+
+/* colors */
+@white: #fff;
+
+/* screens */
+@big:   ~"only screen and (min-width: 1200px)";
+@full:   ~"only screen and (min-width: 1000px) and (max-width: 1199px)";
+@middle:    ~"only screen and (min-width: 900px) and (max-width: 999px)";
+@small:    ~"only screen and (max-width: 899px)";
+
+
+
+/* some mixing */
+
+.transition-properties(@arguments) {
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
+}

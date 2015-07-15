@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 			},
 			js: {
 				src: [
-					// './bower_components/jquery/jquery.js',
+					// './bower_components/jquery/dist/jquery.min.js',
 					// './bower_components/bootstrap/dist/js/bootstrap.js',
 					'./app/assets/js/frontend.js'
 				],
@@ -40,11 +40,41 @@ module.exports = function(grunt) {
 			},
 		},
 		copy: {
-			main: {
+			normalize: {
 				files: [
 					{
 						src: ['./bower_components/normalize.css/normalize.css'], 
 						dest: './public/assets/css/normalize.css', 
+					},
+				],
+			},
+			jquery: {
+				files: [
+					{
+						src: ['./bower_components/jquery/dist/jquery.min.map'], 
+						dest: './public/assets/js/jquery.min.map', 
+					},
+					{
+						src: ['./bower_components/jquery/dist/jquery.min.js'], 
+						dest: './public/assets/js/jquery.min.js', 
+					},
+				],
+			},
+			fontawesome: {
+				files: [
+					{
+						expand: true,
+						cwd: './bower_components/fontawesome/css/',
+						src: '**', 
+						dest: './public/assets/css/', 
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						cwd: './bower_components/fontawesome/fonts/',
+						src: '**', 
+						dest: './public/assets/fonts/', 
+						filter: 'isFile'
 					},
 				],
 			},
@@ -57,11 +87,11 @@ module.exports = function(grunt) {
 					// './bower_components/bootstrap/dist/js/bootstrap.js',
 					'./app/assets/js/frontend.js'
 					],	 
-				tasks: ['concat:js','uglify:js'], //tasks to run
+				tasks: ['concat:js'], //tasks to run
 			},
 			less: {
 				files: ['./app/assets/css/*.less'],	//watched files
-				tasks: ['less', 'copy:main'], //tasks to run
+				tasks: ['less', 'copy:normalize'], //tasks to run
 			},
 		}
 	});
