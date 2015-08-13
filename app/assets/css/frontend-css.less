@@ -6,7 +6,7 @@ html {
 
 body {
 	background: #fff;
-	min-width: @min-w;
+	// min-width: @min-w;
 	font-size: .8em;
 }
 
@@ -57,23 +57,22 @@ table {
 .flight-table {
 
 	.table-head {
-		position: absolute;
 		left: @base-padding;
-		top: 89px;
-		width: calc(~"100% - 120px");
+		width: 100%;
 		height: 36px;
 		overflow: hidden;
-		z-index: 100;
-
-	}
-
-	.table-head-fixed {
-		position: fixed;
+		z-index: 20;
+		position: static;
+		position:-webkit-sticky;  
+		position: sticky;  
 		top: 0;
+
 	}
 
 	.table-body {
 		overflow: hidden;
+		margin: -36px 0 0 0;
+		position: relative;
 	}
 
 	table {
@@ -106,6 +105,7 @@ table {
 				content: '\00a0';
 				z-index: -2;
 			}
+
 			tr:nth-child(odd) td:before {
 				background: #dff0d8;
 			}
@@ -149,6 +149,37 @@ table {
 
 } // .flight-table
 
+//firefox fix height
+@-moz-document url-prefix() { 
+	.flight-table {
+		.table-head {
+			height: 35px;
+		}
+		.table-body {
+			margin: -35px 0 0 0;
+		}
+	}
+}
+//firefox fix height
+
+//chrome drop styles
+.chrome-table {
+	.table-head {
+		width: calc(~"100% - 120px");
+		position: absolute;
+		top: 84px;
+		z-index: 100;
+	}
+	.table-head-fixed {
+		position: fixed;
+		top: 0;
+	}
+	.table-body {
+		margin: 0;
+	}
+}
+//chrome drop styles
+
 // open-popup
 .overlay_div:target, .overlay_div:target + .popup {
 	display: block;
@@ -185,15 +216,15 @@ label { margin: 0 20px 20px 0; line-height: 1em; font-size: 12px; }
 
 .popup {
 	position: fixed;
-	left: 50vw; 
-	top: 50vh;
+	left: 50%; 
+	top: 50%;
 	width: 30vw; 
 	height: auto; 
 	background: @white;
 	z-index: 200;
 	min-width: 500px;
 	min-height: 300px;
-	margin: -15vh 0 0 -15vw;
+	margin: -150px 0 0 -250px;
 	display: none;
 
 	.wrapper { 
@@ -267,18 +298,21 @@ label { margin: 0 20px 20px 0; line-height: 1em; font-size: 12px; }
 	td { padding: 3px 3px; }
 
 	.flight-table {
-		
 		.table-head {
 			left: @base-padding-middle;
+		}
+	}
+
+	.chrome-table.flight-table {
+		.table-head {
 			top: @base-padding-middle;
 			width: calc(~"100% - 40px");
 		}
-
 		.table-head-fixed {
 			top: 0;
 		}
-
 	}
+
 	.container {
 		margin: @base-padding-middle;
 	}
@@ -301,17 +335,18 @@ label { margin: 0 20px 20px 0; line-height: 1em; font-size: 12px; }
 	}
 
 	.flight-table {
-		
 		.table-head {
 			left: @base-padding-middle;
-			top: @base-padding-middle;
+		}
+	}
+	.chrome-table.flight-table {
+		.table-head {
+			// top: @base-padding-middle;
 			width: calc(~"100% - 40px");
 		}
-
 		.table-head-fixed {
 			top: 0;
 		}
-
 	}
 	.container {
 		margin: @base-padding-middle;

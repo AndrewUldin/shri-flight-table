@@ -8,7 +8,6 @@ html {
 }
 body {
   background: #fff;
-  min-width: 800px;
   font-size: .8em;
 }
 /* some default styles */
@@ -43,20 +42,20 @@ table tr {
   border: 1px solid #ccc;
 }
 .flight-table .table-head {
-  position: absolute;
   left: 60px;
-  top: 89px;
-  width: calc(100% - 120px);
+  width: 100%;
   height: 36px;
   overflow: hidden;
-  z-index: 100;
-}
-.flight-table .table-head-fixed {
-  position: fixed;
+  z-index: 20;
+  position: static;
+  position: -webkit-sticky;
+  position: sticky;
   top: 0;
 }
 .flight-table .table-body {
   overflow: hidden;
+  margin: -36px 0 0 0;
+  position: relative;
 }
 .flight-table table {
   border-collapse: collapse;
@@ -117,6 +116,27 @@ table tr {
 .flight-table table td.status {
   white-space: normal;
 }
+@-moz-document url-prefix() {
+  .flight-table .table-head {
+    height: 35px;
+  }
+  .flight-table .table-body {
+    margin: -35px 0 0 0;
+  }
+}
+.chrome-table .table-head {
+  width: calc(100% - 120px);
+  position: absolute;
+  top: 84px;
+  z-index: 100;
+}
+.chrome-table .table-head-fixed {
+  position: fixed;
+  top: 0;
+}
+.chrome-table .table-body {
+  margin: 0;
+}
 .overlay_div:target,
 .overlay_div:target + .popup {
   display: block;
@@ -161,15 +181,15 @@ label {
 }
 .popup {
   position: fixed;
-  left: 50vw;
-  top: 50vh;
+  left: 50%;
+  top: 50%;
   width: 30vw;
   height: auto;
   background: #ffffff;
   z-index: 200;
   min-width: 500px;
   min-height: 300px;
-  margin: -15vh 0 0 -15vw;
+  margin: -150px 0 0 -250px;
   display: none;
 }
 .popup .wrapper {
@@ -275,10 +295,12 @@ label {
   }
   .flight-table .table-head {
     left: 20px;
+  }
+  .chrome-table.flight-table .table-head {
     top: 20px;
     width: calc(100% - 40px);
   }
-  .flight-table .table-head-fixed {
+  .chrome-table.flight-table .table-head-fixed {
     top: 0;
   }
   .container {
@@ -313,10 +335,11 @@ label {
   }
   .flight-table .table-head {
     left: 20px;
-    top: 20px;
+  }
+  .chrome-table.flight-table .table-head {
     width: calc(100% - 40px);
   }
-  .flight-table .table-head-fixed {
+  .chrome-table.flight-table .table-head-fixed {
     top: 0;
   }
   .container {

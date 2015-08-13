@@ -19807,7 +19807,22 @@
 
 		</div>
 		<script type="text/javascript">
+
+	/* Fallback fixed menu for no firefox and no safari browsers */
+	/* http://caniuse.com/#feat=css-sticky */
+
 		var isWebkit = 'WebkitAppearance' in document.documentElement.style; // webkit detect
+		var is_chrome = is_safari = false;
+		var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+		var ua = navigator.userAgent.toLowerCase(); 
+		  if (ua.indexOf('safari') != -1) { 
+		    if (ua.indexOf('chrome') > -1) {
+		      is_chrome = true;
+		    } else {
+		      is_safari = true;
+		    }
+		  }
+	if (!is_firefox && !is_safari) {
 
 		var body = document.body,
 		    timer;
@@ -19835,6 +19850,8 @@
 		}
 
 		function fixPanel() {
+
+			addClass('.flight-table', 'chrome-table');
 
 			if (isWebkit)
 				var scrollTop = document.body.scrollTop;
@@ -19870,8 +19887,10 @@
 		    removeClass('body', 'disable-hover');
 		  },500);
 		}, false);
+	}
+	/* Fallback fixed menu for no firefox and no safari browsers */
+	</script>
 
-		</script>
 
 	</body>
 </html>
