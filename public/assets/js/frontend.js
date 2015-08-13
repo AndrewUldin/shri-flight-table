@@ -50,7 +50,7 @@ function getData(table_items) {
 			"<tr data-key='"+index+"' data-type='"+flight['type']+"'>"+ // здесь index нужен, чтобы потом получать полные данные о рейсе
 				"<td class='a-center'><i class='fa fa-sign-"+flight['type']+"'></i></td>"+
 				"<td>"+flight['number']+"</td>"+
-				"<td class='full middle small a-center company_icon'><img src='assets/images/"+flight['company_icon']+".gif' width='110' height='30' alt='"+flight['company']+"' title='"+flight['company']+"'></td>"+
+				"<td class='full middle small a-center company_icon'><img src='assets/images/"+flight['company_icon']+".gif' alt='"+flight['company']+"' title='"+flight['company']+"'></td>"+
 				"<td class='company full'>"+
 					"<div class='full'>"+flight['company_alias']+"</div>"+
 					"<div class='big'>"+flight['company']+"</div>"+

@@ -48,9 +48,9 @@ function getData(table_items) {
 
 		$(".table-body table tbody").append(
 			"<tr data-key='"+index+"' data-type='"+flight['type']+"'>"+ // здесь index нужен, чтобы потом получать полные данные о рейсе
-				"<td class='a-center'><i class='fa fa-sign-"+flight['type']+"'></i></td>"+
+				"<td class='a-center'><a href='#row-"+index+"'><i class='fa fa-sign-"+flight['type']+"'></i></a></td>"+
 				"<td>"+flight['number']+"</td>"+
-				"<td class='full middle small a-center company_icon'><img src='assets/images/"+flight['company_icon']+".gif' alt='"+flight['company']+"' title='"+flight['company']+"'></td>"+
+				"<td class='full middle small a-center company_icon'><img src='assets/images/"+flight['company_icon']+".gif' width='110' height='30' alt='"+flight['company']+"' title='"+flight['company']+"'></td>"+
 				"<td class='company full'>"+
 					"<div class='full'>"+flight['company_alias']+"</div>"+
 					"<div class='big'>"+flight['company']+"</div>"+
@@ -64,6 +64,65 @@ function getData(table_items) {
 				"<td class='status'>"+flight['status']+"</td>"+
 				"<td>"+flight['comment']+"</td>"+
 			"</tr>"
+		);
+		if (flight['arrive_airport_short'] == 'in') {
+			flight['type'] = 'Прилет';
+			flight['time_text'] = 'прибытия';
+		} else {
+			flight['type'] = 'Вылет';
+			flight['time_text'] = 'вылета';
+		}
+		$(".info").append(
+			"<div id='row-"+index+"'>"+
+			"<div class='popup'>"+
+				"<div class='wrapper'>"+
+					"<div class='content'>"+
+						"<table class='hidden template'>
+							<tbody>
+								<tr>
+									<td>Тип рейса</td>
+									<td>"+flight['type']+"</td>
+								</tr>
+								<tr>
+									<td>Номер рейса</td>
+									<td>"+flight['number']+"</td>
+								</tr>
+								<tr>
+									<td>Время "+flight['time_text']+"</td>
+									<td>"+flight['time']+"</td>
+								</tr>
+								<tr>
+									<td>Воздушное судно</td>
+									<td>"+flight['aircraft']+"</td>
+								</tr>
+								<tr>
+									<td>Аэропорт прибытия</td>
+									<td>"+flight['arrive_airport']+" ("+flight['arrive_airport_short']+")</td>
+								</tr>
+								<tr>
+									<td rowspan='2'>Авиаперевозчик</td>
+									<td>"+flight['company']+" ("+flight['company_alias']+")</td>
+								</tr>
+								<tr>
+									<td class='image_place'>
+									<img src='assets/images/"+flight['company_icon']+".gif' width='110' height='30' alt='"+flight['company']+"' title='"+flight['company']+"'>
+									</td>
+								</tr>
+								<tr>
+									<td>Аэропорт отправления</td>
+									<td>"+flight['depart_airport']+" ("+flight['depart_airport_short']+")</td>
+								</tr>
+								<tr>
+									<td>Статус</td>
+									<td>"+flight['status']+"</td>
+								</tr>
+							</tbody>
+						</table>"+
+					"</div>"+
+					"<a class='close'><i class='fa fa-close'></i></a>"+
+				"</div>"+
+			"</div>"+
+			"</div>"
 		);
 	});
 

@@ -25,7 +25,8 @@ module.exports = function(grunt) {
 				},
 				files: {
 					//compiling frontend.less into frontend.css
-					"./public/assets/css/frontend.css":"./app/assets/css/frontend.less"
+					"./public/assets/css/frontend.css":"./app/assets/css/frontend.less",
+					"./public/assets/css/frontend-css.css":"./app/assets/css/frontend-css.less"
 				}
 			}
 		},

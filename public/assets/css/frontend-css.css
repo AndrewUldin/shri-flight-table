@@ -18,17 +18,24 @@ body {
 .hidden {
   display: none;
 }
+h1 {
+  font-size: 25px;
+  line-height: 25px;
+  margin: 10px 0;
+}
+.disable-hover {
+  pointer-events: none;
+}
 /* some default styles */
 .container {
-  margin: 60px;
+  margin: 20px 60px;
 }
 table td {
-  padding: 3px 5px;
   margin: 0;
   border: 1px solid #ccc;
-  background: #ffffff;
   white-space: nowrap;
   border-style: none solid solid none;
+  font-size: 12px;
 }
 table tr {
   padding: 0;
@@ -38,15 +45,18 @@ table tr {
 .flight-table .table-head {
   position: absolute;
   left: 60px;
-  top: 60px;
+  top: 89px;
   width: calc(100% - 120px);
-  height: 20px;
+  height: 36px;
   overflow: hidden;
   z-index: 100;
 }
 .flight-table .table-head-fixed {
   position: fixed;
   top: 0;
+}
+.flight-table .table-body {
+  overflow: hidden;
 }
 .flight-table table {
   border-collapse: collapse;
@@ -61,17 +71,44 @@ table tr {
   padding: 10px 5px;
   background: #fcf8e3;
 }
-.flight-table table tbody tr:nth-child(odd) td {
+.flight-table table tbody tr td:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: block;
+  content: '\00a0';
+  z-index: -2;
+}
+.flight-table table tbody tr:nth-child(odd) td:before {
   background: #dff0d8;
 }
-.flight-table table tbody tr:nth-child(even) td {
-  background: #ffffff;
-}
-.flight-table table tbody tr:hover td,
-.flight-table table tbody tr td.hover {
+.flight-table table tbody tr:hover td:before {
   background: #f2dede;
 }
-.flight-table table td img {
+.flight-table table tbody tr td:hover::after {
+  background: #f2dede;
+  content: '\00a0';
+  height: 10000px;
+  left: 0;
+  position: absolute;
+  top: -5000px;
+  width: 100%;
+  z-index: -1;
+}
+.flight-table table tbody td {
+  position: relative;
+}
+.flight-table table tbody td a.open-popup {
+  position: relative;
+  display: block;
+  padding: 3px 5px;
+  height: 100%;
+  color: black;
+  text-decoration: none;
+}
+.flight-table table tbody td img {
   max-width: 100%;
   display: block;
   margin: 0 auto;
@@ -80,18 +117,39 @@ table tr {
 .flight-table table td.status {
   white-space: normal;
 }
-form {
-  background: #e6e6e6;
+.overlay_div:target,
+.overlay_div:target + .popup {
+  display: block;
+}
+.table-body .in,
+.table-head .in,
+.table-body .out,
+.table-head .out {
+  display: none;
+}
+input[name='in']:checked ~ .table-body .in {
+  display: table-row;
+}
+input[name='out']:checked ~ .table-body .out {
+  display: table-row;
+}
+input[name='in']:checked ~ .table-head .in {
+  display: table-row;
+}
+input[name='out']:checked ~ .table-head .out {
+  display: table-row;
+}
+input {
   margin: 0 0 20px 0;
+  line-height: 1em;
+  font-size: 12px;
 }
-form label {
-  padding: 20px;
-  display: inline-block;
+label {
+  margin: 0 20px 20px 0;
+  line-height: 1em;
+  font-size: 12px;
 }
-form label input[type=checkbox] {
-  margin: 0 5px 0 0;
-}
-.overlay {
+.overlay_div {
   position: fixed;
   left: 0;
   top: 0;

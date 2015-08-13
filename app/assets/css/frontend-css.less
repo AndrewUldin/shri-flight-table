@@ -17,22 +17,32 @@ body {
 .hidden {
 	display: none;
 }
+
+h1 {
+	font-size: 25px;
+	line-height: 25px;
+	margin: 10px 0;
+}
+
+.disable-hover {
+  pointer-events: none;
+}
+
 /* some default styles */
 
 .container {
-	margin: @base-padding;
+	margin: @base-padding-middle @base-padding;
 }
+
 
 table {
 
 	td {
-		padding: 3px 5px;
 		margin: 0;
 		border: 1px solid #ccc;
-		background: @white;
 		white-space: nowrap;
 		border-style: none solid solid none;
-		// .transition-properties(background .05s linear;); /* semicolon is necessary */
+		font-size: 12px;
 	}
 
 	tr {
@@ -49,9 +59,9 @@ table {
 	.table-head {
 		position: absolute;
 		left: @base-padding;
-		top: @base-padding;
+		top: 89px;
 		width: calc(~"100% - 120px");
-		height: 20px;
+		height: 36px;
 		overflow: hidden;
 		z-index: 100;
 
@@ -60,6 +70,10 @@ table {
 	.table-head-fixed {
 		position: fixed;
 		top: 0;
+	}
+
+	.table-body {
+		overflow: hidden;
 	}
 
 	table {
@@ -81,26 +95,53 @@ table {
 
 		}
 		tbody {
-			tr:nth-child(odd) td {
+
+			tr td:before {
+				position: absolute; 
+				left: 0; 
+				top: 0; 
+				right: 0;
+				height: 100%;
+				display: block;
+				content: '\00a0';
+				z-index: -2;
+			}
+			tr:nth-child(odd) td:before {
 				background: #dff0d8;
 			}
-			tr:nth-child(even) td {
-				background: #ffffff;
-			}
-			tr:hover td, tr td.hover {
+			tr:hover td:before {
 				background: #f2dede;
 			}
-
-		}
-
-		td {
-			img { 
-				max-width: 100%;
-				display: block;
-				margin: 0 auto;
+			tr td:hover::after {
+			    background: #f2dede;
+			    content: '\00a0';
+			    height: 10000px;
+			    left: 0;
+			    position: absolute;
+			    top: -5000px;
+			    width: 100%;
+			    z-index: -1;
 			}
-		}
 
+			td {
+				position: relative;
+
+				a.open-popup {
+					position: relative;
+					display: block;
+					padding: 3px 5px;
+					height: 100%;
+					color: black;
+					text-decoration: none;
+				}
+				img { 
+					max-width: 100%;
+					display: block;
+					margin: 0 auto;
+				}
+			}
+
+		}
 		td.company, td.status {
 			white-space: normal;
 		}
@@ -108,21 +149,30 @@ table {
 
 } // .flight-table
 
-form {
-	background: darken(@white, 10%);
-	margin: 0 0 20px 0;
-
-	label {
-		padding: 20px;
-		display: inline-block;
-
-		input[type=checkbox] {
-			margin: 0 5px 0 0;
-		}
-	}
+// open-popup
+.overlay_div:target, .overlay_div:target + .popup {
+	display: block;
 }
+// open-popup
 
-.overlay {
+// checkboxes
+.table-body .in, .table-head .in, .table-body .out, .table-head .out { display: none; }
+input[name='in']:checked ~.table-body .in {display: table-row;}
+input[name='out']:checked ~.table-body .out {display: table-row;}
+
+// you need it for fix thead td width
+input[name='in']:checked ~.table-head .in {display: table-row;}
+input[name='out']:checked ~.table-head .out {display: table-row;}
+
+input { margin: 0 0 20px 0; line-height: 1em; font-size: 12px; }
+label { margin: 0 20px 20px 0; line-height: 1em; font-size: 12px; }
+
+// http://stackoverflow.com/questions/10782054/what-does-the-css-tilde-squiggle-twiddle-selector-do
+
+// checkboxes
+
+
+.overlay_div {
 	position: fixed;
 	left: 0; 
 	top: 0; 
